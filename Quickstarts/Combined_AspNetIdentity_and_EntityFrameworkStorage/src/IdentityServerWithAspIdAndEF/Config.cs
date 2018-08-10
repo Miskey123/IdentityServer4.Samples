@@ -23,7 +23,9 @@ namespace IdentityServerWithAspIdAndEF
         {
             return new List<ApiResource>
             {
-                new ApiResource("api1", "My API")
+                new ApiResource("api1", "My API"){
+                    ApiSecrets={new Secret("secret".Sha256())}
+                }
             };
         }
 
@@ -38,7 +40,7 @@ namespace IdentityServerWithAspIdAndEF
                     ClientId = "client",
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
 
-                    ClientSecrets = 
+                    ClientSecrets =
                     {
                         new Secret("secret".Sha256())
                     },
@@ -51,7 +53,7 @@ namespace IdentityServerWithAspIdAndEF
                     ClientId = "ro.client",
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
 
-                    ClientSecrets = 
+                    ClientSecrets =
                     {
                         new Secret("secret".Sha256())
                     },
@@ -64,10 +66,11 @@ namespace IdentityServerWithAspIdAndEF
                     ClientId = "mvc",
                     ClientName = "MVC Client",
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+                    AccessTokenType = AccessTokenType.Reference,
 
                     RequireConsent = true,
 
-                    ClientSecrets = 
+                    ClientSecrets =
                     {
                         new Secret("secret".Sha256())
                     },
